@@ -14,8 +14,20 @@ with DAG(
     default_args={"retries": 0},
     tags=["examen"],
 ) as dag:
+    # dbt source freshness: una advertencia termina con codigo 0 (permite el build);
+    # un error termina con codigo distinto de 0, run_dbt lanza la excepcion y la tarea falla.
+    verificar_freshness = PythonOperator(
+        task_id="verificar_freshness",
+        python_callable=run_dbt,
+        op_args=[["source", "freshness"]],
+    )
+
+    # Regla de ejecucion predeterminada (all_success): si freshness falla,
+    # esta tarea queda en upstream_failed y no se ejecuta.
     construir_resumen = PythonOperator(
         task_id="construir_resumen",
         python_callable=run_dbt,
         op_args=[["build"]],
     )
+
+    verificar_freshness >> construir_resumen
