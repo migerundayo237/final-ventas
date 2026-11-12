@@ -1,0 +1,5 @@
+run_id=manual__2026-11-12T12:31:18.176385+00:00/task_id=construir_resumen
+run_id=manual__2026-11-12T12:31:18.176385+00:00/task_id=verificar_freshness
+run_id=manual__2026-11-12T12:34:19.471653+00:00/task_id=verificar_freshness
+run_id=manual__2026-11-12T12:36:14.192283+00:00/task_id=construir_resumen
+run_id=manual__2026-11-12T12:36:14.192283+00:00/task_id=verificar_freshness
